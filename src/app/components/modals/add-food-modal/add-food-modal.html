@@ -1,0 +1,52 @@
+<div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+  <div class="bg-white dark:bg-gray-800 rounded-3xl p-8 m-4 max-w-md w-full shadow-2xl">
+    <div class="flex justify-between items-center mb-6">
+      <h2 class="text-2xl font-bold text-gray-800 dark:text-white">🍱 Add Food</h2>
+      <button (click)="close()" class="text-gray-500 dark:text-gray-400 text-2xl hover:text-gray-700 dark:hover:text-gray-200">
+        ×
+      </button>
+    </div>
+
+    <form (ngSubmit)="submit()" class="space-y-4">
+      <div>
+        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Search Food</label>
+        <input
+          type="text"
+          [(ngModel)]="searchQuery"
+          (input)="onSearchChange()"
+          name="foodSearch"
+          class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl dark:bg-gray-700 dark:text-white"
+          placeholder="e.g., Hot Tea, Apple..."
+        />
+        <div class="mt-2 space-y-1 max-h-40 overflow-y-auto">
+          <div
+            *ngFor="let food of suggestions"
+            class="p-2 bg-gray-100 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600"
+            (click)="selectFood(food)"
+          >
+            <span class="font-medium text-gray-800 dark:text-white">{{ food.name }}</span>
+            <span class="text-sm text-gray-600 dark:text-gray-400 ml-2">{{ food.calories }} kcal</span>
+          </div>
+        </div>
+      </div>
+
+      <button
+        type="submit"
+        [disabled]="!selectedFood"
+        class="w-full   text-white font-semibold py-3 px-6 rounded-xl transition-all transform hover:scale-105"
+        style="
+    background-image: linear-gradient(to right, #f472b6, #a78bfa);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 9999px;
+    transition: background 0.3s ease;
+  "
+  onmouseover="this.style.backgroundImage='linear-gradient(to right, #ec4899, #8b5cf6)'"
+  onmouseout="this.style.backgroundImage='linear-gradient(to right, #f472b6, #a78bfa)'"
+      >
+        Add Food
+      </button>
+    </form>
+  </div>
+</div>

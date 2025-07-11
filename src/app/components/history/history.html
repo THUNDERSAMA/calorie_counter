@@ -1,0 +1,48 @@
+<div class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg">
+  <div class="flex items-center justify-between mb-6">
+    <h2 class="text-2xl font-bold text-gray-800 dark:text-white">
+      📅 Daily History
+    </h2>
+  </div>
+
+  <div
+    *ngIf="sortedDates.length > 0; else noData"
+    class="space-y-4 max-h-96 overflow-y-auto"
+  >
+    <div *ngFor="let date of sortedDates">
+      <div
+        class="bg-gradient-to-r from-pastel-blue to-pastel-green dark:from-gray-700 dark:to-gray-600 rounded-xl p-4 shadow-md hover:shadow-lg transition-all duration-300"
+      >
+        <div class="flex justify-between items-center">
+          <div>
+            <h3 class="font-semibold text-gray-800 dark:text-white">
+              {{ date }}
+            </h3>
+            <p class="text-sm text-gray-600 dark:text-gray-300">
+              {{ dailyData[date].totalCalories.toFixed(0) }} kcal consumed
+            </p>
+            <p class="text-xs text-green-600 dark:text-green-400">
+              {{
+                maintenanceCalories - dailyData[date].totalCalories.toFixed(0)
+              }}
+              kcal deficit
+            </p>
+          </div>
+          <button
+            class="bg-white dark:bg-gray-800 text-blue-600 dark:text-blue-400 px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-50 dark:hover:bg-gray-700 transition-colors"
+            (click)="emitDay(date)"
+          >
+            View Details
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #noData>
+    <div class="text-center text-gray-500 dark:text-gray-400 py-8">
+      <span class="text-4xl mb-4 block">📝</span>
+      <p>No history yet. Start tracking your calories!</p>
+    </div>
+  </ng-template>
+</div>

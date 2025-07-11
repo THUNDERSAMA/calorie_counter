@@ -1,0 +1,55 @@
+<div class="grid md:grid-cols-2 gap-6 mb-8">
+  <!-- Today's Calories -->
+  <div
+    class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300"
+  >
+    <div class="flex items-center justify-between mb-4">
+      <h2 class="text-xl font-semibold text-gray-800 dark:text-white">
+        Today's Calories
+      </h2>
+      <span class="text-2xl">📊</span>
+    </div>
+    <div class="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">
+      {{ todayCalories.toFixed(0) }} kcal
+    </div>
+    <div class="text-sm text-gray-600 dark:text-gray-400">
+      {{ todayDate }}
+    </div>
+  </div>
+
+  <div
+    class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300"
+  >
+    <div class="flex items-center justify-between mb-4">
+      <h2 class="text-xl font-semibold text-gray-800 dark:text-white">
+        Remaining
+      </h2>
+      <span class="text-2xl">🎯</span>
+    </div>
+    <div class="text-3xl font-bold text-green-600 dark:text-green-400 mb-2">
+      {{ remaining.toFixed(0) }} kcal
+    </div>
+    <div class="text-sm text-gray-600 dark:text-gray-400">
+      Until maintenance goal
+    </div>
+  </div>
+</div>
+
+<!-- Progress Bar -->
+<div class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg mb-8">
+  <div class="flex justify-between items-center mb-2">
+    <span class="text-sm font-medium text-gray-700 dark:text-gray-300"
+      >Daily Progress</span
+    >
+    <span class="text-sm text-gray-500 dark:text-gray-400"
+      >{{ progress.toFixed(0) }}%
+    </span>
+  </div>
+  <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3">
+    <div
+      class="h-3 rounded-full transition-all duration-500"
+      [style.width.%]="progress"
+      style="background-image: linear-gradient(to right, #60a5fa, #34d399)"
+    ></div>
+  </div>
+</div>
