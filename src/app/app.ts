@@ -17,9 +17,8 @@ import { any } from 'zod';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet,CommonModule,
+  imports: [CommonModule,
     FormsModule,
-    App,
     Header,
     Summary,
     History,
@@ -33,7 +32,10 @@ import { any } from 'zod';
 export class App {
   protected title = 'calorie_counter';
   totalToday = 0;
-  profile: any = null;
+  //profile: any = null;
+  profile: any= {
+    maintenanceCalories: 0
+  };
   dailyData: any = {};
   private calorieService = inject(CalorieTracker);
 showWelcomeModal = false;
@@ -43,7 +45,13 @@ progress = 0;
     this.profile = this.calorieService.getProfile();
     this.totalToday = this.calorieService.getTodayCalories();
  this.dailyData = this.calorieService.getDailyData();
- this.progress = Math.round((this.totalToday / this.profile.maintenanceCalories) * 100);
+ if (this.profile)
+ {
+ this.progress = Math.round((this.totalToday / this.profile.maintenanceCalories==null?0:this.profile.maintenanceCalories) * 100);
+ }
+ else {
+ this.progress = 0;
+ }
     if (!this.profile) {
       this.profile = {
     maintenanceCalories: 0

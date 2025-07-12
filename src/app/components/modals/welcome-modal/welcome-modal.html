@@ -1,44 +1,90 @@
-<div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-  <div class="bg-white dark:bg-gray-800 rounded-3xl p-8 m-4 max-w-md w-full shadow-2xl">
+<div
+  class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+>
+  <div
+    class="bg-white dark:bg-gray-800 rounded-3xl p-8 m-4 max-w-md w-full shadow-2xl"
+  >
     <div class="text-center mb-6">
       <span class="text-6xl mb-4 block">🧑‍⚕️</span>
-      <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-2">Welcome to Calorie Tracker!</h2>
-      <p class="text-gray-600 dark:text-gray-300">Let's set up your profile to calculate daily needs.</p>
+      <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-2">
+        Welcome to Calorie Tracker!
+      </h2>
+      <p class="text-gray-600 dark:text-gray-300">
+        Let's set up your profile to calculate daily needs.
+      </p>
     </div>
 
     <form (ngSubmit)="submitForm()" class="space-y-4">
       <div>
-        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Height (cm)</label>
-        <input type="number" [(ngModel)]="height" name="height" required class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl dark:bg-gray-700 dark:text-white">
+        <label
+          class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+          >Height (cm)</label
+        >
+        <input
+          type="number"
+          [(ngModel)]="height"
+          name="height"
+          required
+          class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl dark:bg-gray-700 text-white"
+        />
       </div>
       <div>
-        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Weight (kg)</label>
-        <input type="number" [(ngModel)]="weight" name="weight" required class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl dark:bg-gray-700 dark:text-white">
+        <label
+          class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+          >Weight (kg)</label
+        >
+        <input
+          type="number"
+          [(ngModel)]="weight"
+          name="weight"
+          required
+          class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl dark:bg-gray-700 text-white"
+        />
       </div>
       <div>
-        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Age</label>
-        <input type="number" [(ngModel)]="age" name="age" required class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl dark:bg-gray-700 dark:text-white">
+        <label
+          class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+          >Age</label
+        >
+        <input
+          type="number"
+          [(ngModel)]="age"
+          name="age"
+          required
+          class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl dark:bg-gray-700 text-white"
+        />
       </div>
       <div>
-        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Gender</label>
-        <select [(ngModel)]="gender" name="gender" required class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl dark:bg-gray-700 dark:text-white">
+        <label
+          class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+          >Gender</label
+        >
+        <select
+          [(ngModel)]="gender"
+          name="gender"
+          required
+          class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl dark:bg-gray-700 text-white"
+        >
           <option value="">Select</option>
           <option value="male">Male</option>
           <option value="female">Female</option>
         </select>
       </div>
 
-      <button type="submit" class="w-full  text-white font-semibold py-3 px-6 rounded-xl hover:scale-105 transition-all"
-      style="
-    background-image: linear-gradient(to right, #f472b6, #a78bfa);
-    color: white;
-    border: none;
-    padding: 12px 24px;
-    border-radius: 9999px;
-    transition: background 0.3s ease;
-  "
-  onmouseover="this.style.backgroundImage='linear-gradient(to right, #ec4899, #8b5cf6)'"
-  onmouseout="this.style.backgroundImage='linear-gradient(to right, #f472b6, #a78bfa)'">
+      <button
+        type="submit"
+        class="w-full text-white font-semibold py-3 px-6 rounded-xl hover:scale-105 transition-all"
+        style="
+          background-image: linear-gradient(to right, #f472b6, #a78bfa);
+          color: white;
+          border: none;
+          padding: 12px 24px;
+          border-radius: 9999px;
+          transition: background 0.3s ease;
+        "
+        onmouseover="this.style.backgroundImage='linear-gradient(to right, #ec4899, #8b5cf6)'"
+        onmouseout="this.style.backgroundImage='linear-gradient(to right, #f472b6, #a78bfa)'"
+      >
         Calculate My Daily Calories
       </button>
     </form>

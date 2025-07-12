@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CalorieTracker {
   getProfile() {
@@ -21,15 +21,17 @@ export class CalorieTracker {
   }
 
   getCookie(name: string): string | null {
-    const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+    const match = document.cookie.match(
+      new RegExp('(^| )' + name + '=([^;]+)')
+    );
     return match ? decodeURIComponent(match[2]) : null;
   }
   saveDailyData(data: any) {
     this.setCookie('calorieTracker_data', JSON.stringify(data), 365);
   }
-saveProfile(profile: any) {
-  this.setCookie('calorieTracker_profile', JSON.stringify(profile), 365);
-}
+  saveProfile(profile: any) {
+    this.setCookie('calorieTracker_profile', JSON.stringify(profile), 365);
+  }
   addTodayFood(food: { name: string; calories: number }) {
     const today = new Date().toDateString();
     const data = this.getDailyData();
@@ -37,7 +39,7 @@ saveProfile(profile: any) {
     if (!data[today]) {
       data[today] = {
         foods: [],
-        totalCalories: 0
+        totalCalories: 0,
       };
     }
 
@@ -47,10 +49,10 @@ saveProfile(profile: any) {
     this.saveDailyData(data);
   }
 
-  
-
   private setCookie(name: string, value: string, days: number) {
     const expires = new Date(Date.now() + days * 86400000).toUTCString();
-    document.cookie = `${name}=${encodeURIComponent(value)};expires=${expires};path=/`;
+    document.cookie = `${name}=${encodeURIComponent(
+      value
+    )};expires=${expires};path=/`;
   }
 }
