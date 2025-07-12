@@ -1,14 +1,14 @@
 import { CommonModule } from '@angular/common';
-import { Component ,Input, OnChanges} from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 @Component({
   selector: 'app-summary',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './summary.html',
-  styleUrls: ['../../../../dist/output.scss','./summary.scss']
+  styleUrls: ['../../../../dist/output.scss', './summary.scss'],
 })
 export class Summary implements OnChanges {
-@Input() todayCalories: number = 0;
+  @Input() todayCalories: number = 0;
   @Input() maintenanceCalories: number = 2000;
 
   progress: number = 0;
@@ -22,11 +22,12 @@ export class Summary implements OnChanges {
       day: 'numeric',
       year: 'numeric',
     });
-    
-}
- calculateProgress(): void {
+  }
+  calculateProgress(): void {
     this.remaining = Math.max(0, this.maintenanceCalories - this.todayCalories);
-    this.progress = Math.min(100, (this.todayCalories / this.maintenanceCalories) * 100);
+    this.progress = Math.min(
+      100,
+      (this.todayCalories / this.maintenanceCalories) * 100
+    );
   }
 }
-

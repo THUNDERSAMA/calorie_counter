@@ -9,10 +9,10 @@ interface FoodItem {
   selector: 'app-day-details-modal',
   imports: [CommonModule],
   templateUrl: './day-details-modal.html',
-  styleUrls: ['../../../../../dist/output.scss','./day-details-modal.scss']
+  styleUrls: ['../../../../../dist/output.scss', './day-details-modal.scss'],
 })
 export class DayDetailsModal {
-@Input() date: string = '';
+  @Input() date: string = '';
   @Input() foods: FoodItem[] = [];
   @Output() closed = new EventEmitter<void>();
 

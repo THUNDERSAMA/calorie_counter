@@ -17,7 +17,8 @@ import { any } from 'zod';
 
 @Component({
   selector: 'app-root',
-  imports: [CommonModule,
+  imports: [
+    CommonModule,
     FormsModule,
     Header,
     Summary,
@@ -27,83 +28,83 @@ import { any } from 'zod';
     DayDetailsModal,
   ],
   templateUrl: './app.html',
-  styleUrls: ['../../dist/output.scss']
+  styleUrls: ['../../dist/output.scss'],
 })
 export class App {
   protected title = 'calorie_counter';
   totalToday = 0;
   //profile: any = null;
-  profile: any= {
-    maintenanceCalories: 0
+  profile: any = {
+    maintenanceCalories: 0,
   };
   dailyData: any = {};
   private calorieService = inject(CalorieTracker);
-showWelcomeModal = false;
-foodList: any[] = [];
-progress = 0;
+  showWelcomeModal = false;
+  foodList: any[] = [];
+  progress = 0;
   ngOnInit() {
     this.profile = this.calorieService.getProfile();
     this.totalToday = this.calorieService.getTodayCalories();
- this.dailyData = this.calorieService.getDailyData();
- if (this.profile)
- {
- this.progress = Math.round((this.totalToday / this.profile.maintenanceCalories==null?0:this.profile.maintenanceCalories) * 100);
- }
- else {
- this.progress = 0;
- }
+    this.dailyData = this.calorieService.getDailyData();
+    if (this.profile) {
+      this.progress = Math.round(
+        (this.totalToday / this.profile.maintenanceCalories == null
+          ? 0
+          : this.profile.maintenanceCalories) * 100
+      );
+    } else {
+      this.progress = 0;
+    }
     if (!this.profile) {
       this.profile = {
-    maintenanceCalories: 0
-  };
+        maintenanceCalories: 0,
+      };
       console.log('🔔 Show Welcome Modal');
       this.showWelcomeModal = true;
     }
-  //  const foodData = ;
-  //  console.log('🍽️ Food List Loaded:', foodData);
-  //  this.foodList = (foodList as any).default || [];
-  //   console.log('🍽️ Food List:', this.foodList);
-  fetch('../../data/food_list.json')
-  .then(response => response.json())
-  .then(data => {
-    this.foodList = data.map((item: any) => ({
-      name: item["Dish Name"],
-      calories: item["Calories (kcal)"]
-    }));
-  });
+    //  const foodData = ;
+    //  console.log('🍽️ Food List Loaded:', foodData);
+    //  this.foodList = (foodList as any).default || [];
+    //   console.log('🍽️ Food List:', this.foodList);
+    fetch('../../data/food_list.json')
+      .then((response) => response.json())
+      .then((data) => {
+        this.foodList = data.map((item: any) => ({
+          name: item['Dish Name'],
+          calories: item['Calories (kcal)'],
+        }));
+      });
   }
   handleProfileSubmit(profile: any) {
-  this.profile = profile;
-  this.calorieService.saveProfile(profile);
-  this.totalToday = this.calorieService.getTodayCalories();
-  this.dailyData = this.calorieService.getDailyData();
-  this.showWelcomeModal = false;
-}
- selectedDay: string = '';
-selectedDayFoods: any[] = [];
-showDayDetailsModal = false;
-
-onViewDay(date: string) {
-  const entry = this.dailyData[date];
-  if (entry && entry.foods) {
-    this.selectedDay = date;
-    this.selectedDayFoods = entry.foods;
-    this.showDayDetailsModal = true;
+    this.profile = profile;
+    this.calorieService.saveProfile(profile);
+    this.totalToday = this.calorieService.getTodayCalories();
+    this.dailyData = this.calorieService.getDailyData();
+    this.showWelcomeModal = false;
   }
-}
+  selectedDay: string = '';
+  selectedDayFoods: any[] = [];
+  showDayDetailsModal = false;
+
+  onViewDay(date: string) {
+    const entry = this.dailyData[date];
+    if (entry && entry.foods) {
+      this.selectedDay = date;
+      this.selectedDayFoods = entry.foods;
+      this.showDayDetailsModal = true;
+    }
+  }
 
   //get food list from json file
-  
 
   // constructor() {
-    
-      
+
   // }
   showAddModal = false;
 
-handleFoodAdd(food: any) {
-  this.calorieService.addTodayFood(food);
-  this.totalToday = this.calorieService.getTodayCalories();
-  this.dailyData = this.calorieService.getDailyData();
-}
+  handleFoodAdd(food: any) {
+    this.calorieService.addTodayFood(food);
+    this.totalToday = this.calorieService.getTodayCalories();
+    this.dailyData = this.calorieService.getDailyData();
+  }
 }

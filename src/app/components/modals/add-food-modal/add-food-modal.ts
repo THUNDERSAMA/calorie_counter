@@ -11,10 +11,10 @@ interface FoodItem {
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './add-food-modal.html',
-  styleUrls: ['../../../../../dist/output.scss','./add-food-modal.scss']
+  styleUrls: ['../../../../../dist/output.scss', './add-food-modal.scss'],
 })
 export class AddFoodModal {
-@Input() foodDatabase: FoodItem[] = [];
+  @Input() foodDatabase: FoodItem[] = [];
   @Output() foodAdded = new EventEmitter<FoodItem>();
   @Output() closed = new EventEmitter<void>();
 
@@ -22,31 +22,31 @@ export class AddFoodModal {
   suggestions: FoodItem[] = [];
   selectedFood: FoodItem | null = null;
 
- onSearchChange() {
-  const q = this.searchQuery.toLowerCase().trim();
-  console.log('[Search] Query:', q);
-  console.log('[Search] Available items:', this.foodDatabase);
+  onSearchChange() {
+    const q = this.searchQuery.toLowerCase().trim();
+    console.log('[Search] Query:', q);
+    console.log('[Search] Available items:', this.foodDatabase);
 
-  if (q.length === 0) {
-    this.suggestions = [];
-    return;
+    if (q.length === 0) {
+      this.suggestions = [];
+      return;
+    }
+
+    this.suggestions = this.foodDatabase
+      .filter((f) => f.name?.toLowerCase().includes(q))
+      .slice(0, 5);
+
+    console.log('[Suggestions]', this.suggestions);
   }
 
-  this.suggestions = this.foodDatabase
-    .filter(f => f.name?.toLowerCase().includes(q))
-    .slice(0, 5);
-
-  console.log('[Suggestions]', this.suggestions);
-}
-
-selectFood(food: FoodItem) {
-  this.searchQuery = food.name;
-  this.selectedFood = {
-    name: food.name,
-    calories: food.calories
-  };
-  this.suggestions = [];
-}
+  selectFood(food: FoodItem) {
+    this.searchQuery = food.name;
+    this.selectedFood = {
+      name: food.name,
+      calories: food.calories,
+    };
+    this.suggestions = [];
+  }
   submit() {
     if (this.selectedFood) {
       this.foodAdded.emit(this.selectedFood);
